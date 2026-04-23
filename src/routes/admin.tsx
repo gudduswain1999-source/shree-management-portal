@@ -24,12 +24,18 @@ function AdminLayout() {
   const { isAdmin, loading, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const isLoginRoute = location.pathname === "/admin/login";
 
   useEffect(() => {
-    if (!loading && !isAdmin && location.pathname !== "/admin/login") {
+    if (!loading && !isAdmin && !isLoginRoute) {
       navigate({ to: "/admin/login" });
     }
-  }, [isAdmin, loading, navigate, location.pathname]);
+  }, [isAdmin, loading, navigate, isLoginRoute]);
+
+  // Render the login page without the admin chrome / guard
+  if (isLoginRoute) {
+    return <Outlet />;
+  }
 
   if (loading) {
     return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Loading...</div>;
