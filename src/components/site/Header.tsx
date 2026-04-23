@@ -26,8 +26,8 @@ export function Header() {
       <div className="bg-primary text-primary-foreground text-xs">
         <div className="container-academic flex h-9 items-center justify-between gap-4">
           <div className="hidden md:flex items-center gap-5">
-            <span className="flex items-center gap-1.5"><Phone className="h-3 w-3" /> +91 98765 43210</span>
-            <span className="flex items-center gap-1.5"><Mail className="h-3 w-3" /> info@shreemanagement.edu.in</span>
+            <span className="flex items-center gap-1.5"><Phone className="h-3 w-3" /><span>+91 98765 43210</span></span>
+            <span className="flex items-center gap-1.5"><Mail className="h-3 w-3" /><span>info@shreemanagement.edu.in</span></span>
           </div>
           <div className="flex items-center gap-4 ml-auto">
             <Link to="/result" className="hover:text-gold transition-colors">Check Result</Link>

@@ -17,9 +17,16 @@ import { Route as EnquiryRouteImport } from './routes/enquiry'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CampusLifeRouteImport } from './routes/campus-life'
 import { Route as AdmissionsRouteImport } from './routes/admissions'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AcademicsRouteImport } from './routes/academics'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminSupportRouteImport } from './routes/admin.support'
+import { Route as AdminStudentsRouteImport } from './routes/admin.students'
+import { Route as AdminResultsRouteImport } from './routes/admin.results'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminEnquiriesRouteImport } from './routes/admin.enquiries'
 
 const SupportRoute = SupportRouteImport.update({
   id: '/support',
@@ -61,6 +68,11 @@ const AdmissionsRoute = AdmissionsRouteImport.update({
   path: '/admissions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AcademicsRoute = AcademicsRouteImport.update({
   id: '/academics',
   path: '/academics',
@@ -76,11 +88,42 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSupportRoute = AdminSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminStudentsRoute = AdminStudentsRouteImport.update({
+  id: '/students',
+  path: '/students',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminResultsRoute = AdminResultsRouteImport.update({
+  id: '/results',
+  path: '/results',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEnquiriesRoute = AdminEnquiriesRouteImport.update({
+  id: '/enquiries',
+  path: '/enquiries',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/academics': typeof AcademicsRoute
+  '/admin': typeof AdminRouteWithChildren
   '/admissions': typeof AdmissionsRoute
   '/campus-life': typeof CampusLifeRoute
   '/contact': typeof ContactRoute
@@ -89,6 +132,12 @@ export interface FileRoutesByFullPath {
   '/placements': typeof PlacementsRoute
   '/result': typeof ResultRoute
   '/support': typeof SupportRoute
+  '/admin/enquiries': typeof AdminEnquiriesRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/results': typeof AdminResultsRoute
+  '/admin/students': typeof AdminStudentsRoute
+  '/admin/support': typeof AdminSupportRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -102,12 +151,19 @@ export interface FileRoutesByTo {
   '/placements': typeof PlacementsRoute
   '/result': typeof ResultRoute
   '/support': typeof SupportRoute
+  '/admin/enquiries': typeof AdminEnquiriesRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/results': typeof AdminResultsRoute
+  '/admin/students': typeof AdminStudentsRoute
+  '/admin/support': typeof AdminSupportRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/academics': typeof AcademicsRoute
+  '/admin': typeof AdminRouteWithChildren
   '/admissions': typeof AdmissionsRoute
   '/campus-life': typeof CampusLifeRoute
   '/contact': typeof ContactRoute
@@ -116,6 +172,12 @@ export interface FileRoutesById {
   '/placements': typeof PlacementsRoute
   '/result': typeof ResultRoute
   '/support': typeof SupportRoute
+  '/admin/enquiries': typeof AdminEnquiriesRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/results': typeof AdminResultsRoute
+  '/admin/students': typeof AdminStudentsRoute
+  '/admin/support': typeof AdminSupportRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -123,6 +185,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/academics'
+    | '/admin'
     | '/admissions'
     | '/campus-life'
     | '/contact'
@@ -131,6 +194,12 @@ export interface FileRouteTypes {
     | '/placements'
     | '/result'
     | '/support'
+    | '/admin/enquiries'
+    | '/admin/login'
+    | '/admin/results'
+    | '/admin/students'
+    | '/admin/support'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,11 +213,18 @@ export interface FileRouteTypes {
     | '/placements'
     | '/result'
     | '/support'
+    | '/admin/enquiries'
+    | '/admin/login'
+    | '/admin/results'
+    | '/admin/students'
+    | '/admin/support'
+    | '/admin'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/academics'
+    | '/admin'
     | '/admissions'
     | '/campus-life'
     | '/contact'
@@ -157,12 +233,19 @@ export interface FileRouteTypes {
     | '/placements'
     | '/result'
     | '/support'
+    | '/admin/enquiries'
+    | '/admin/login'
+    | '/admin/results'
+    | '/admin/students'
+    | '/admin/support'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AcademicsRoute: typeof AcademicsRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AdmissionsRoute: typeof AdmissionsRoute
   CampusLifeRoute: typeof CampusLifeRoute
   ContactRoute: typeof ContactRoute
@@ -231,6 +314,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdmissionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/academics': {
       id: '/academics'
       path: '/academics'
@@ -252,13 +342,76 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/support': {
+      id: '/admin/support'
+      path: '/support'
+      fullPath: '/admin/support'
+      preLoaderRoute: typeof AdminSupportRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/students': {
+      id: '/admin/students'
+      path: '/students'
+      fullPath: '/admin/students'
+      preLoaderRoute: typeof AdminStudentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/results': {
+      id: '/admin/results'
+      path: '/results'
+      fullPath: '/admin/results'
+      preLoaderRoute: typeof AdminResultsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/enquiries': {
+      id: '/admin/enquiries'
+      path: '/enquiries'
+      fullPath: '/admin/enquiries'
+      preLoaderRoute: typeof AdminEnquiriesRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
+
+interface AdminRouteChildren {
+  AdminEnquiriesRoute: typeof AdminEnquiriesRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminResultsRoute: typeof AdminResultsRoute
+  AdminStudentsRoute: typeof AdminStudentsRoute
+  AdminSupportRoute: typeof AdminSupportRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminEnquiriesRoute: AdminEnquiriesRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminResultsRoute: AdminResultsRoute,
+  AdminStudentsRoute: AdminStudentsRoute,
+  AdminSupportRoute: AdminSupportRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AcademicsRoute: AcademicsRoute,
+  AdminRoute: AdminRouteWithChildren,
   AdmissionsRoute: AdmissionsRoute,
   CampusLifeRoute: CampusLifeRoute,
   ContactRoute: ContactRoute,
