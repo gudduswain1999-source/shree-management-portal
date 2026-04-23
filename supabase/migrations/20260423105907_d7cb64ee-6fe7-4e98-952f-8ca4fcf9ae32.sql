@@ -1,0 +1,1 @@
+INSERT INTO public.admin_email_allowlist (email) VALUES ('souravkumarswain@vyapar.com') ON CONFLICT (email) DO NOTHING;
