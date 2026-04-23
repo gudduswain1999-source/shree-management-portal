@@ -47,7 +47,7 @@ export function Footer() {
           <ul className="space-y-3 text-sm text-primary-foreground/80">
             <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 shrink-0 text-gold" /> Shree Campus Road, Pune, Maharashtra 411001</li>
             <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5 shrink-0 text-gold" /> +91 98765 43210</li>
-            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 shrink-0 text-gold" /> info@shreemanagement.edu.in</li>
+            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 shrink-0 text-gold" /><span>info@shreemanagement.edu.in</span></li>
           </ul>
           <div className="flex gap-3 mt-4">
             {[Facebook, Twitter, Linkedin, Instagram].map((Icon, i) => (

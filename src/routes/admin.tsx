@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { LayoutDashboard, Users, FileText, MessagesSquare, LifeBuoy, LogOut, ShieldAlert } from "lucide-react";
+import { LayoutDashboard, Users, FileText, MessagesSquare, LifeBuoy, LogOut, ShieldAlert, Settings } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/admin")({
@@ -17,6 +17,7 @@ const sidebar = [
   { to: "/admin/results", label: "Results", icon: FileText, exact: false },
   { to: "/admin/enquiries", label: "Enquiries", icon: MessagesSquare, exact: false },
   { to: "/admin/support", label: "Support", icon: LifeBuoy, exact: false },
+  { to: "/admin/settings", label: "Settings", icon: Settings, exact: false },
 ] as const;
 
 function AdminLayout() {
